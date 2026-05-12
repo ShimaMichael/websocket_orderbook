@@ -3,7 +3,7 @@ CXX = g++
 SRCS = main.cpp
 
 
-LIBS = -lboost_system -pthread -lssl -lcrypto 
+LIBS = -lboost_system -pthread -lssl -lcrypto -lboost_json
 
 all: streamer
 streamer: $(SRCS)

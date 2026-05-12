@@ -8,7 +8,6 @@
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket.hpp>
 #include <boost/beast/websocket/ssl.hpp>
-#include <boost/json.hpp>
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -18,9 +17,8 @@ namespace websocket = beast::websocket;
 namespace net = boost::asio;
 namespace ssl = boost::asio::ssl;
 using tcp = boost::asio::ip::tcp;
-namespace json = boost::json;
 
-int main() {
+void websocket_init() {
     try {
         net::io_context ioc;
 
@@ -89,19 +87,16 @@ int main() {
 
             ws.read(buffer);
 
-            std::string data = beast::buffers_to_string(buffer.data());
-            auto parsed = json::parse(data);
+            std::cout
+                << beast::make_printable(buffer.data())
+                << std::endl;
 
 
-
-            
-
-            std::cout <<parsed<< std::endl;
             std::cout<<" "<<std::endl;
             std::cout<<"-----------------------------"<<std::endl;
             
-            //count++;
-            if (count == 0) { // Example condition to break the loop
+            count++;
+            if (count >= 2) { // Example condition to break the loop
                 break;
             }
         }
@@ -113,7 +108,4 @@ int main() {
                 << e.what()
                 << std::endl;
     }
-
-    return 0;
 }
-
