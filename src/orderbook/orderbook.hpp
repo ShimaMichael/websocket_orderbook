@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+using bids_t = std::map<double, double, std::greater<double>>;
+using asks_t = std::map<double, double>;
 class OrderBook {
     public:
     OrderBook() = default;
@@ -17,9 +19,16 @@ class OrderBook {
 
     void update_ask(const std::string& price, const std::string& quantity);
 
+    const bids_t& get_bids() const {
+        return bids_;
+    }
+    const asks_t& get_asks() const {
+        return asks_;
+    }
+    bids_t bids_;
+    asks_t asks_;
     private:
-        std::map<double, double, std::greater<double>> bids_;
-        std::map<double, double> asks_;
+        
 };
 
 #endif // ORDERBOOK_HPP

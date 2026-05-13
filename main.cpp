@@ -13,6 +13,10 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
+#include "./src/network/websocket.hpp"
+#include "./src/orderbook/orderbook.hpp"
+#include "./src/Utilities/helper.hpp"
+
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
 namespace net = boost::asio;
@@ -20,68 +24,15 @@ namespace ssl = boost::asio::ssl;
 using tcp = boost::asio::ip::tcp;
 namespace json = boost::json;
 
+OrderBook order_book;
+WebSocketClient ws_client;
+
+
 int main() {
     try {
-        net::io_context ioc;
-
-        ssl::context ctx{ssl::context::tlsv12_client};
-
-        ctx.set_verify_mode(ssl::verify_none);
-
-        tcp::resolver resolver{ioc};
-
-        websocket::stream<beast::ssl_stream<tcp::socket>> ws{ioc, ctx};
-
-        
-        std::string host = "ws.gemini.com";
-        std::string port = "443";
-        std::string target = "/?snapshot=-1";
-
-        
-        auto const results = resolver.resolve(host, port);
-
-        
-        net::connect(
-            beast::get_lowest_layer(ws),
-            results
-        );
-
-        
-        if(!SSL_set_tlsext_host_name(
-            ws.next_layer().native_handle(),
-            host.c_str()))
-        {
-            throw beast::system_error(
-                beast::error_code(
-                    static_cast<int>(::ERR_get_error()),
-                    net::error::get_ssl_category()
-                )
-            );
-        }
-
-        ws.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
-        ws.set_option(websocket::stream_base::decorator(
-            [](websocket::request_type& req) {
-                req.set(boost::beast::http::field::user_agent, "Boost.Beast WebSocket Client");
-            }
-        ));
-
-        
-        ws.next_layer().handshake(ssl::stream_base::client);
-        
-        ws.handshake(host, target);
-
-        std::cout
-            << "Connected to Gemini depth stream"
-            << std::endl;
-
-        std::string sub = R"({
-            "method":"SUBSCRIBE",
-            "params":["btcusd@depth@100ms"],
-            "id":1
-        })";
-
-        ws.write(net::buffer(std::string(sub)));
+        ws_client.connect();
+        ws_client.suscribe();
+        websocket_connection& ws = ws_client.get_connection();
 
         int count = 0;
         for (;;) {
@@ -91,19 +42,11 @@ int main() {
 
             std::string data = beast::buffers_to_string(buffer.data());
             auto parsed = json::parse(data);
+            auto obj = parsed.as_object();
 
+            std::cout << "Received update: " << obj << std::endl;
 
-
-            
-
-            std::cout <<parsed<< std::endl;
-            std::cout<<" "<<std::endl;
-            std::cout<<"-----------------------------"<<std::endl;
-            
-            //count++;
-            if (count == 0) { // Example condition to break the loop
-                break;
-            }
+            processObject(obj, order_book);         
         }
 
     }

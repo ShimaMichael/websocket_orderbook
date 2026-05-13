@@ -1,4 +1,5 @@
 #include "orderbook.hpp"
+#include <iostream>
 
 
 void OrderBook::load_snapshot(const std::vector<std::pair<std::string, std::string>>& bids,

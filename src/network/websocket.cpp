@@ -1,111 +1,67 @@
-#include <iostream>
-#include <string>
+#include "websocket.hpp"
 
-#include <boost/asio/connect.hpp>
-#include <boost/asio/ip/tcp.hpp>
 
-#include <boost/beast/core.hpp>
-#include <boost/beast/ssl.hpp>
-#include <boost/beast/websocket.hpp>
-#include <boost/beast/websocket/ssl.hpp>
+WebSocketClient::WebSocketClient():
+    ioc_(),
+    ctx_{ssl::context::tlsv12_client},
+    resolver_{ioc_},
+    ws_{ioc_, ctx_}
+{
+    ctx_.set_verify_mode(ssl::verify_none);
+}
 
-#include <openssl/ssl.h>
-#include <openssl/err.h>
-
-namespace beast = boost::beast;
-namespace websocket = beast::websocket;
-namespace net = boost::asio;
-namespace ssl = boost::asio::ssl;
-using tcp = boost::asio::ip::tcp;
-
-void websocket_init() {
-    try {
-        net::io_context ioc;
-
-        ssl::context ctx{ssl::context::tlsv12_client};
-
-        ctx.set_verify_mode(ssl::verify_none);
-
-        tcp::resolver resolver{ioc};
-
-        websocket::stream<beast::ssl_stream<tcp::socket>> ws{ioc, ctx};
-
+void WebSocketClient::connect() {
         
-        std::string host = "ws.gemini.com";
-        std::string port = "443";
-        std::string target = "/?snapshot=-1";
+    std::string host = "ws.gemini.com";
+    std::string port = "443";
+    std::string target = "/?snapshot=-1";
 
-        
-        auto const results = resolver.resolve(host, port);
+    
+    auto const results = this->resolver_.resolve(host, port);
 
-        
-        net::connect(
-            beast::get_lowest_layer(ws),
-            results
+    
+    net::connect(
+        beast::get_lowest_layer(this->ws_),
+        results
+    );
+
+    
+    if(!SSL_set_tlsext_host_name(
+        this->ws_.next_layer().native_handle(),
+        host.c_str()))
+    {
+        throw beast::system_error(
+            beast::error_code(
+                static_cast<int>(::ERR_get_error()),
+                net::error::get_ssl_category()
+            )
         );
-
-        
-        if(!SSL_set_tlsext_host_name(
-            ws.next_layer().native_handle(),
-            host.c_str()))
-        {
-            throw beast::system_error(
-                beast::error_code(
-                    static_cast<int>(::ERR_get_error()),
-                    net::error::get_ssl_category()
-                )
-            );
-        }
-
-        ws.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
-        ws.set_option(websocket::stream_base::decorator(
-            [](websocket::request_type& req) {
-                req.set(boost::beast::http::field::user_agent, "Boost.Beast WebSocket Client");
-            }
-        ));
-
-        
-        ws.next_layer().handshake(ssl::stream_base::client);
-        
-        ws.handshake(host, target);
-
-        std::cout
-            << "Connected to Gemini depth stream"
-            << std::endl;
-
-        std::string sub = R"({
-            "method":"SUBSCRIBE",
-            "params":["btcusd@depth@100ms"],
-            "id":1
-        })";
-
-        ws.write(net::buffer(std::string(sub)));
-
-        int count = 0;
-        for (;;) {
-            beast::flat_buffer buffer;
-
-            ws.read(buffer);
-
-            std::cout
-                << beast::make_printable(buffer.data())
-                << std::endl;
-
-
-            std::cout<<" "<<std::endl;
-            std::cout<<"-----------------------------"<<std::endl;
-            
-            count++;
-            if (count >= 2) { // Example condition to break the loop
-                break;
-            }
-        }
-
     }
-    catch (const std::exception& e) {
-            std::cerr
-                << "Error: "
-                << e.what()
-                << std::endl;
-    }
+
+    this->ws_.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
+    this->ws_.set_option(websocket::stream_base::decorator(
+        [](websocket::request_type& req) {
+            req.set(boost::beast::http::field::user_agent, "Boost.Beast WebSocket Client");
+        }
+    ));
+
+    
+    this->ws_.next_layer().handshake(ssl::stream_base::client);
+    
+    this->ws_.handshake(host, target);
+
+    std::cout
+        << "Connected to Gemini depth stream"
+        << std::endl;
+}
+
+
+void WebSocketClient::suscribe() {
+    std::string sub = R"({
+        "method":"SUBSCRIBE",
+        "params":["btcusd@depth@100ms"],
+        "id":1
+    })";
+
+    this->ws_.write(net::buffer(std::string(sub)));
 }
