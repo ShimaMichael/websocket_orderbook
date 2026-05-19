@@ -12,6 +12,10 @@ WebSocketClient ws_client;
 std::pair<OrderLevel, OrderLevel> best_levels;
 
 
+/*** Connects to the websocket feed, processes order book updates, and prints the best levels.
+@param None.
+@return Program exit status code.
+***/
 int main() {
     try {
         ws_client.connect();
