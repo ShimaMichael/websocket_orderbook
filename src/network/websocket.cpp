@@ -10,13 +10,7 @@ WebSocketClient::WebSocketClient():
     ctx_.set_verify_mode(ssl::verify_none);
 }
 
-void WebSocketClient::connect() {
-        
-    std::string host = "ws.gemini.com";
-    std::string port = "443";
-    std::string target = "/?snapshot=-1";
-
-    
+void WebSocketClient::connect(std::string host, std::string port, std::string target) {
     auto const results = this->resolver_.resolve(host, port);
 
     
@@ -38,16 +32,9 @@ void WebSocketClient::connect() {
         );
     }
 
-    this->ws_.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
-    this->ws_.set_option(websocket::stream_base::decorator(
-        [](websocket::request_type& req) {
-            req.set(boost::beast::http::field::user_agent, "Boost.Beast WebSocket Client");
-        }
-    ));
+    set_options();
 
-    
     this->ws_.next_layer().handshake(ssl::stream_base::client);
-    
     this->ws_.handshake(host, target);
 
     std::cout
@@ -64,4 +51,13 @@ void WebSocketClient::suscribe() {
     })";
 
     this->ws_.write(net::buffer(std::string(sub)));
+}
+
+void WebSocketClient::set_options(){
+    this->ws_.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
+    this->ws_.set_option(websocket::stream_base::decorator(
+        [](websocket::request_type& req) {
+            req.set(boost::beast::http::field::user_agent, "Boost.Beast WebSocket Client");
+        }
+    ));
 }

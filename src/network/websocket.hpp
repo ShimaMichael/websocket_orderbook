@@ -29,7 +29,7 @@ class WebSocketClient {
         WebSocketClient();
         ~WebSocketClient() = default;    
 
-        void connect();
+        void connect(std::string host = "ws.gemini.com", std::string port = "443", std::string target = "/?snapshot=-1");
 
         void suscribe();
 
@@ -44,8 +44,9 @@ class WebSocketClient {
         tcp::resolver resolver_{ioc_};
         websocket_connection ws_{ioc_, ctx_};
 
-        
+        void set_options();
 
+    
 };
 
 websocket_connection websocket_init();

@@ -1,5 +1,12 @@
 *.p
+*.pch
+*.pdb
+*.d
 *.o
-./bin
-./build
-./vscode
+*.obj
+*.log
+*.tmp
+/bin/
+/build/
+/.vscode/
+.DS_Store
