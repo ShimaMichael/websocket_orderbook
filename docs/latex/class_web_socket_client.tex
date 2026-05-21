@@ -1,0 +1,112 @@
+\doxysection{Web\+Socket\+Client Class Reference}
+\hypertarget{class_web_socket_client}{}\label{class_web_socket_client}\index{WebSocketClient@{WebSocketClient}}
+
+
+{\ttfamily \#include $<$websocket.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_web_socket_client_a8be976f224fccacb952a9c556085ea23}{Web\+Socket\+Client}} ()
+\item 
+\mbox{\hyperlink{class_web_socket_client_a4312da84d0077f91a9b04fb9fef73acf}{\texorpdfstring{$\sim$}{\string~}\+Web\+Socket\+Client}} ()=default
+\item 
+void \mbox{\hyperlink{class_web_socket_client_aae727905a2a0a5d802c0dd261a1eb6a7}{connect}} (std\+::string host="{}ws.\+gemini.\+com"{}, std\+::string port="{}443"{}, std\+::string target="{}/?snapshot=-\/1"{})
+\item 
+void \mbox{\hyperlink{class_web_socket_client_a5abae778ee27619e76ca6e07bab3c7c6}{suscribe}} ()
+\item 
+\mbox{\hyperlink{websocket_8hpp_a60358d5abe4a8a683931d7d343dc11cf}{websocket\+\_\+connection}} \& \mbox{\hyperlink{class_web_socket_client_aa31612756fc9f72980f01a4c5d20b0ee}{get\+\_\+connection}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Owns a TLS websocket connection to a market data endpoint. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+\label{doc-constructors}
+\Hypertarget{class_web_socket_client_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_web_socket_client_a8be976f224fccacb952a9c556085ea23}\index{WebSocketClient@{WebSocketClient}!WebSocketClient@{WebSocketClient}}
+\index{WebSocketClient@{WebSocketClient}!WebSocketClient@{WebSocketClient}}
+\doxysubsubsection{\texorpdfstring{WebSocketClient()}{WebSocketClient()}}
+{\footnotesize\ttfamily \label{class_web_socket_client_a8be976f224fccacb952a9c556085ea23} 
+Web\+Socket\+Client\+::\+Web\+Socket\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Creates a websocket client and configures the SSL context. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+\Hypertarget{class_web_socket_client_a4312da84d0077f91a9b04fb9fef73acf}\index{WebSocketClient@{WebSocketClient}!````~WebSocketClient@{\texorpdfstring{$\sim$}{\string~}WebSocketClient}}
+\index{````~WebSocketClient@{\texorpdfstring{$\sim$}{\string~}WebSocketClient}!WebSocketClient@{WebSocketClient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WebSocketClient()}{\string~WebSocketClient()}}
+{\footnotesize\ttfamily \label{class_web_socket_client_a4312da84d0077f91a9b04fb9fef73acf} 
+Web\+Socket\+Client\+::\texorpdfstring{$\sim$}{\string~}\+Web\+Socket\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_web_socket_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_web_socket_client_aae727905a2a0a5d802c0dd261a1eb6a7}\index{WebSocketClient@{WebSocketClient}!connect@{connect}}
+\index{connect@{connect}!WebSocketClient@{WebSocketClient}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{class_web_socket_client_aae727905a2a0a5d802c0dd261a1eb6a7} 
+void Web\+Socket\+Client\+::connect (\begin{DoxyParamCaption}\item[{std\+::string}]{host}{ = {\ttfamily "{}ws.gemini.com"{}}, }\item[{std\+::string}]{port}{ = {\ttfamily "{}443"{}}, }\item[{std\+::string}]{target}{ = {\ttfamily "{}/?snapshot=-\/1"{}}}\end{DoxyParamCaption})}
+
+Opens the TCP, TLS, and websocket handshakes to the configured endpoint. 
+\begin{DoxyParams}{Parameters}
+{\em host} & Websocket host name to resolve and connect to. \\
+\hline
+{\em port} & Service port to connect to. \\
+\hline
+{\em target} & Websocket request target used during the handshake. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+\Hypertarget{class_web_socket_client_aa31612756fc9f72980f01a4c5d20b0ee}\index{WebSocketClient@{WebSocketClient}!get\_connection@{get\_connection}}
+\index{get\_connection@{get\_connection}!WebSocketClient@{WebSocketClient}}
+\doxysubsubsection{\texorpdfstring{get\_connection()}{get\_connection()}}
+{\footnotesize\ttfamily \label{class_web_socket_client_aa31612756fc9f72980f01a4c5d20b0ee} 
+\mbox{\hyperlink{websocket_8hpp_a60358d5abe4a8a683931d7d343dc11cf}{websocket\+\_\+connection}} \& Web\+Socket\+Client\+::get\+\_\+connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Provides access to the underlying websocket stream. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the active websocket connection. 
+\end{DoxyReturn}
+\Hypertarget{class_web_socket_client_a5abae778ee27619e76ca6e07bab3c7c6}\index{WebSocketClient@{WebSocketClient}!suscribe@{suscribe}}
+\index{suscribe@{suscribe}!WebSocketClient@{WebSocketClient}}
+\doxysubsubsection{\texorpdfstring{suscribe()}{suscribe()}}
+{\footnotesize\ttfamily \label{class_web_socket_client_a5abae778ee27619e76ca6e07bab3c7c6} 
+void Web\+Socket\+Client\+::suscribe (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Sends the order book depth subscription message over the active websocket. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/network/\mbox{\hyperlink{websocket_8hpp}{websocket.\+hpp}}\item 
+src/network/\mbox{\hyperlink{websocket_8cpp}{websocket.\+cpp}}\end{DoxyCompactItemize}

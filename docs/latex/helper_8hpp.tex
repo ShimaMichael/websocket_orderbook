@@ -1,0 +1,38 @@
+\doxysection{src/\+Utilities/helper.hpp File Reference}
+\hypertarget{helper_8hpp}{}\label{helper_8hpp}\index{src/Utilities/helper.hpp@{src/Utilities/helper.hpp}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$boost/json.\+hpp$>$}\newline
+{\ttfamily \#include "{}../orderbook/orderbook.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{helper_8hpp_a87551d75a72e450de510cdda28c1a2d9}{process\+Object}} (const json\+::object \&obj, \mbox{\hyperlink{class_order_book}{Order\+Book}} \&order\+\_\+book)
+\item 
+int64\+\_\+t \mbox{\hyperlink{helper_8hpp_ab1806cb05016c1468914d7e27c14650d}{parse\+\_\+string\+\_\+to\+\_\+int64}} (const boost\+::json\+::string \&value, int target\+\_\+decimals)
+\item 
+void \mbox{\hyperlink{helper_8hpp_a2041dfd1eda5161c1fd84586155b29e9}{print\+\_\+order\+\_\+book}} (std\+::pair$<$ \mbox{\hyperlink{struct_order_level}{Order\+Level}}, \mbox{\hyperlink{struct_order_level}{Order\+Level}} $>$ \&level)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{helper_8hpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{helper_8hpp_ab1806cb05016c1468914d7e27c14650d}\index{helper.hpp@{helper.hpp}!parse\_string\_to\_int64@{parse\_string\_to\_int64}}
+\index{parse\_string\_to\_int64@{parse\_string\_to\_int64}!helper.hpp@{helper.hpp}}
+\doxysubsubsection{\texorpdfstring{parse\_string\_to\_int64()}{parse\_string\_to\_int64()}}
+{\footnotesize\ttfamily \label{helper_8hpp_ab1806cb05016c1468914d7e27c14650d} 
+int64\+\_\+t parse\+\_\+string\+\_\+to\+\_\+int64 (\begin{DoxyParamCaption}\item[{const boost\+::json\+::string \&}]{value}{, }\item[{int}]{target\+\_\+decimals}{}\end{DoxyParamCaption})}
+
+\Hypertarget{helper_8hpp_a2041dfd1eda5161c1fd84586155b29e9}\index{helper.hpp@{helper.hpp}!print\_order\_book@{print\_order\_book}}
+\index{print\_order\_book@{print\_order\_book}!helper.hpp@{helper.hpp}}
+\doxysubsubsection{\texorpdfstring{print\_order\_book()}{print\_order\_book()}}
+{\footnotesize\ttfamily \label{helper_8hpp_a2041dfd1eda5161c1fd84586155b29e9} 
+void print\+\_\+order\+\_\+book (\begin{DoxyParamCaption}\item[{std\+::pair$<$ \mbox{\hyperlink{struct_order_level}{Order\+Level}}, \mbox{\hyperlink{struct_order_level}{Order\+Level}} $>$ \&}]{level}{}\end{DoxyParamCaption})}
+
+\Hypertarget{helper_8hpp_a87551d75a72e450de510cdda28c1a2d9}\index{helper.hpp@{helper.hpp}!processObject@{processObject}}
+\index{processObject@{processObject}!helper.hpp@{helper.hpp}}
+\doxysubsubsection{\texorpdfstring{processObject()}{processObject()}}
+{\footnotesize\ttfamily \label{helper_8hpp_a87551d75a72e450de510cdda28c1a2d9} 
+void process\+Object (\begin{DoxyParamCaption}\item[{const json\+::object \&}]{obj}{, }\item[{\mbox{\hyperlink{class_order_book}{Order\+Book}} \&}]{order\+\_\+book}{}\end{DoxyParamCaption})}
+

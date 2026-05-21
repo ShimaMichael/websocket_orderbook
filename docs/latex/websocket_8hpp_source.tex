@@ -1,0 +1,63 @@
+\doxysection{websocket.\+hpp}
+\hypertarget{websocket_8hpp_source}{}\label{websocket_8hpp_source}\index{src/network/websocket.hpp@{src/network/websocket.hpp}}
+\mbox{\hyperlink{websocket_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WEBSOCKET\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WEBSOCKET\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <boost/asio/connect.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <boost/asio/ip/tcp.hpp>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <boost/beast/core.hpp>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <boost/beast/ssl.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <boost/beast/websocket.hpp>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <boost/beast/websocket/ssl.hpp>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <boost/json.hpp>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <openssl/ssl.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <openssl/err.h>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }beast\ =\ boost::beast;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }websocket\ =\ beast::websocket;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }net\ =\ boost::asio;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{namespace\ }ssl\ =\ boost::asio::ssl;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{using\ }\mbox{\hyperlink{websocket_8hpp_aacd32e7300ba1ea408f0cb79dbe33d86}{tcp}}\ =\ boost::asio::ip::tcp;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{using\ }\mbox{\hyperlink{websocket_8hpp_a60358d5abe4a8a683931d7d343dc11cf}{websocket\_connection}}\ =\ websocket::stream<beast::ssl\_stream<tcp::socket>>;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_web_socket_client_a8be976f224fccacb952a9c556085ea23}{WebSocketClient}}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_web_socket_client_a8be976f224fccacb952a9c556085ea23}{WebSocketClient}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ \ \ \ /***}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Destroys\ the\ websocket\ client\ and\ owned\ networking\ resources.}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @param\ None.}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @return\ No\ return\ value.}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_web_socket_client_a4312da84d0077f91a9b04fb9fef73acf}{\string~WebSocketClient}}()\ =\ \textcolor{keywordflow}{default};\ \ \ \ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_web_socket_client_aae727905a2a0a5d802c0dd261a1eb6a7}{connect}}(std::string\ host\ =\ \textcolor{stringliteral}{"{}ws.gemini.com"{}},\ std::string\ port\ =\ \textcolor{stringliteral}{"{}443"{}},\ std::string\ target\ =\ \textcolor{stringliteral}{"{}/?snapshot=-\/1"{}});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_web_socket_client_a5abae778ee27619e76ca6e07bab3c7c6}{suscribe}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{websocket_8hpp_a60358d5abe4a8a683931d7d343dc11cf}{websocket\_connection}}\&\ \mbox{\hyperlink{class_web_socket_client_aa31612756fc9f72980f01a4c5d20b0ee}{get\_connection}}()\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ws\_;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ net::io\_context\ ioc\_;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ ssl::context\ ctx\_\{ssl::context::tlsv12\_client\};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ tcp::resolver\ resolver\_\{ioc\_\};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{websocket_8hpp_a60358d5abe4a8a683931d7d343dc11cf}{websocket\_connection}}\ ws\_\{ioc\_,\ ctx\_\};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ set\_options();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WEBSOCKET\_HPP}}
+
+\end{DoxyCode}

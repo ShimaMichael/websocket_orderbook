@@ -1,0 +1,103 @@
+\doxysection{orderbook.\+hpp}
+\hypertarget{orderbook_8hpp_source}{}\label{orderbook_8hpp_source}\index{src/orderbook/orderbook.hpp@{src/orderbook/orderbook.hpp}}
+\mbox{\hyperlink{orderbook_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ORDERBOOK\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ORDERBOOK\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_order_level}{OrderLevel}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ int64\_t\ \mbox{\hyperlink{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}{price}};}
+\DoxyCodeLine{00021\ \ \ \ \ int64\_t\ \mbox{\hyperlink{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}{quantity}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_order_level_a5f93b526dc6e7d9817b5f136cc5f05eb}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_order_level}{OrderLevel}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}{price}}\ ==\ other.\mbox{\hyperlink{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}{price}}\ \&\&\ \mbox{\hyperlink{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}{quantity}}\ ==\ other.\mbox{\hyperlink{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}{quantity}};}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_order_level_a847655546923ff923603507884c124b9}{get\_price\_double}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}{price}})\ /\ 100.0;}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_order_level_aefb35bc5e922b5b6474c6be4b0fb63f2}{get\_quantity\_double}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}{quantity}})\ /\ 100000000.0;\ }
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_order_book_ac49a804db195f730535473b5096c8577}{OrderBook}}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_order_book_ac49a804db195f730535473b5096c8577}{OrderBook}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_order_book_a34d37e7193ed67fd24bc571c2fe54a1b}{\string~OrderBook}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_order_book_a22224703428fb9e410a550a962cc2dc4}{update\_bid}}(int64\_t\ price,\ int64\_t\ quantity);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_order_book_a1f4d0ce0933059ab7246e586bddc6726}{update\_ask}}(int64\_t\ price,\ int64\_t\ quantity);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{struct_order_level}{OrderLevel}}\ \mbox{\hyperlink{class_order_book_aff40ad5b0197cfa6bac894df70292418}{get\_best\_bid}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{struct_order_level}{OrderLevel}}\ \mbox{\hyperlink{class_order_book_a5baf134b694ec546baa25ab79aff52dd}{get\_best\_ask}}();}
+\DoxyCodeLine{00101\ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ std::unordered\_map<int64\_t,\ int64\_t>\ bids\_;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ std::unordered\_map<int64\_t,\ int64\_t>\ asks\_;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ std::priority\_queue<int64\_t>\ best\_bids\_heap\_;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ std::priority\_queue<int64\_t,\ std::vector<int64\_t>,\ std::greater<int64\_t>>\ best\_asks\_heap\_;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ HeapType>}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ update\_order(}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ price,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ quantity,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ HeapType\&\ side\_heap,\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ std::unordered\_map<int64\_t,\ int64\_t>\&\ order\_side}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ )\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (quantity\ ==\ 0)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ order\_side.erase(price);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ order\_side.find(price);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ order\_side.end())\{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ side\_heap.push(price);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ order\_side[price]\ =\ quantity;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ it-\/>second\ =\ quantity;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ HeapType>}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ OrderLevel\ get\_best\_level(}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ HeapType\&\ side\_heap,\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ std::unordered\_map<int64\_t,\ int64\_t>\&\ order\_side}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ )\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (order\_side.empty())\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{0,\ 0\};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!side\_heap.empty())\{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ best\_ask\ =\ side\_heap.top();}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ order\_side.find(best\_ask);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it\ ==\ order\_side.end()\ ||\ it-\/>second\ ==\ 0)\{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ side\_heap.pop();\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{it-\/>first,\ it-\/>second\};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{0,0\};}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ORDERBOOK\_HPP}}
+
+\end{DoxyCode}

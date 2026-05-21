@@ -1,10 +1,6 @@
 #include "websocket.hpp"
 
 
-/*** Constructs the websocket client and configures the TLS context.
-@param None.
-@return No return value.
-***/
 WebSocketClient::WebSocketClient():
     ioc_(),
     ctx_{ssl::context::tlsv12_client},
@@ -14,12 +10,7 @@ WebSocketClient::WebSocketClient():
     ctx_.set_verify_mode(ssl::verify_none);
 }
 
-/*** Resolves the endpoint and performs the TCP, TLS, and websocket handshakes.
-@param host Websocket host name to resolve and connect to.
-@param port Service port to connect to.
-@param target Websocket request target used during the handshake.
-@return No return value.
-***/
+
 void WebSocketClient::connect(std::string host, std::string port, std::string target) {
     auto const results = this->resolver_.resolve(host, port);
 
@@ -53,11 +44,7 @@ void WebSocketClient::connect(std::string host, std::string port, std::string ta
 }
 
 
-/*** Sends the depth subscription request over the active websocket connection.
-@param None.
-@return No return value.
-***/
-void WebSocketClient::suscribe() {
+void WebSocketClient::subscribe() {
     std::string sub = R"({
         "method":"SUBSCRIBE",
         "params":["btcusd@depth@100ms"],
@@ -67,10 +54,6 @@ void WebSocketClient::suscribe() {
     this->ws_.write(net::buffer(std::string(sub)));
 }
 
-/*** Configures timeout and user-agent settings on the websocket stream.
-@param None.
-@return No return value.
-***/
 void WebSocketClient::set_options(){
     this->ws_.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
     this->ws_.set_option(websocket::stream_base::decorator(

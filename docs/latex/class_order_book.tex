@@ -1,0 +1,136 @@
+\doxysection{Order\+Book Class Reference}
+\hypertarget{class_order_book}{}\label{class_order_book}\index{OrderBook@{OrderBook}}
+
+
+{\ttfamily \#include $<$orderbook.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_order_book_ac49a804db195f730535473b5096c8577}{Order\+Book}} ()=default
+\item 
+\mbox{\hyperlink{class_order_book_a34d37e7193ed67fd24bc571c2fe54a1b}{\texorpdfstring{$\sim$}{\string~}\+Order\+Book}} ()=default
+\item 
+void \mbox{\hyperlink{class_order_book_a22224703428fb9e410a550a962cc2dc4}{update\+\_\+bid}} (int64\+\_\+t price, int64\+\_\+t quantity)
+\item 
+void \mbox{\hyperlink{class_order_book_a1f4d0ce0933059ab7246e586bddc6726}{update\+\_\+ask}} (int64\+\_\+t price, int64\+\_\+t quantity)
+\item 
+\mbox{\hyperlink{struct_order_level}{Order\+Level}} \mbox{\hyperlink{class_order_book_aff40ad5b0197cfa6bac894df70292418}{get\+\_\+best\+\_\+bid}} ()
+\item 
+\mbox{\hyperlink{struct_order_level}{Order\+Level}} \mbox{\hyperlink{class_order_book_a5baf134b694ec546baa25ab79aff52dd}{get\+\_\+best\+\_\+ask}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Maintains bid and ask sides of an order book and exposes the best levels. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+\label{doc-constructors}
+\Hypertarget{class_order_book_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_order_book_ac49a804db195f730535473b5096c8577}\index{OrderBook@{OrderBook}!OrderBook@{OrderBook}}
+\index{OrderBook@{OrderBook}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{OrderBook()}{OrderBook()}}
+{\footnotesize\ttfamily \label{class_order_book_ac49a804db195f730535473b5096c8577} 
+Order\+Book\+::\+Order\+Book (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Creates an empty order book. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+\Hypertarget{class_order_book_a34d37e7193ed67fd24bc571c2fe54a1b}\index{OrderBook@{OrderBook}!````~OrderBook@{\texorpdfstring{$\sim$}{\string~}OrderBook}}
+\index{````~OrderBook@{\texorpdfstring{$\sim$}{\string~}OrderBook}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}OrderBook()}{\string~OrderBook()}}
+{\footnotesize\ttfamily \label{class_order_book_a34d37e7193ed67fd24bc571c2fe54a1b} 
+Order\+Book\+::\texorpdfstring{$\sim$}{\string~}\+Order\+Book (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Destroys the order book and releases owned containers. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{class_order_book_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_order_book_a5baf134b694ec546baa25ab79aff52dd}\index{OrderBook@{OrderBook}!get\_best\_ask@{get\_best\_ask}}
+\index{get\_best\_ask@{get\_best\_ask}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{get\_best\_ask()}{get\_best\_ask()}}
+{\footnotesize\ttfamily \label{class_order_book_a5baf134b694ec546baa25ab79aff52dd} 
+\mbox{\hyperlink{struct_order_level}{Order\+Level}} Order\+Book\+::get\+\_\+best\+\_\+ask (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Gets the lowest active ask level currently stored in the order book. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Best ask as an \doxylink{struct_order_level}{Order\+Level}, or \{0, 0\} when no ask is available. 
+\end{DoxyReturn}
+\Hypertarget{class_order_book_aff40ad5b0197cfa6bac894df70292418}\index{OrderBook@{OrderBook}!get\_best\_bid@{get\_best\_bid}}
+\index{get\_best\_bid@{get\_best\_bid}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{get\_best\_bid()}{get\_best\_bid()}}
+{\footnotesize\ttfamily \label{class_order_book_aff40ad5b0197cfa6bac894df70292418} 
+\mbox{\hyperlink{struct_order_level}{Order\+Level}} Order\+Book\+::get\+\_\+best\+\_\+bid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Gets the highest active bid level currently stored in the order book. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Best bid as an \doxylink{struct_order_level}{Order\+Level}, or \{0, 0\} when no bid is available. 
+\end{DoxyReturn}
+\Hypertarget{class_order_book_a1f4d0ce0933059ab7246e586bddc6726}\index{OrderBook@{OrderBook}!update\_ask@{update\_ask}}
+\index{update\_ask@{update\_ask}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{update\_ask()}{update\_ask()}}
+{\footnotesize\ttfamily \label{class_order_book_a1f4d0ce0933059ab7246e586bddc6726} 
+void Order\+Book\+::update\+\_\+ask (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{price}{, }\item[{int64\+\_\+t}]{quantity}{}\end{DoxyParamCaption})}
+
+Inserts, updates, or removes an ask level. 
+\begin{DoxyParams}{Parameters}
+{\em price} & Ask price scaled by 100. \\
+\hline
+{\em quantity} & Ask quantity scaled by 100000000. A value of 0 removes the level. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+\Hypertarget{class_order_book_a22224703428fb9e410a550a962cc2dc4}\index{OrderBook@{OrderBook}!update\_bid@{update\_bid}}
+\index{update\_bid@{update\_bid}!OrderBook@{OrderBook}}
+\doxysubsubsection{\texorpdfstring{update\_bid()}{update\_bid()}}
+{\footnotesize\ttfamily \label{class_order_book_a22224703428fb9e410a550a962cc2dc4} 
+void Order\+Book\+::update\+\_\+bid (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{price}{, }\item[{int64\+\_\+t}]{quantity}{}\end{DoxyParamCaption})}
+
+Inserts, updates, or removes a bid level. 
+\begin{DoxyParams}{Parameters}
+{\em price} & Bid price scaled by 100. \\
+\hline
+{\em quantity} & Bid quantity scaled by 100000000. A value of 0 removes the level. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/orderbook/\mbox{\hyperlink{orderbook_8hpp}{orderbook.\+hpp}}\item 
+src/orderbook/\mbox{\hyperlink{orderbook_8cpp}{orderbook.\+cpp}}\end{DoxyCompactItemize}

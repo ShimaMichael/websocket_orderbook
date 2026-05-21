@@ -1,0 +1,104 @@
+\doxysection{Order\+Level Struct Reference}
+\hypertarget{struct_order_level}{}\label{struct_order_level}\index{OrderLevel@{OrderLevel}}
+
+
+{\ttfamily \#include $<$orderbook.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{struct_order_level_a5f93b526dc6e7d9817b5f136cc5f05eb}{operator==}} (const \mbox{\hyperlink{struct_order_level}{Order\+Level}} \&other) const
+\item 
+double \mbox{\hyperlink{struct_order_level_a847655546923ff923603507884c124b9}{get\+\_\+price\+\_\+double}} () const
+\item 
+double \mbox{\hyperlink{struct_order_level_aefb35bc5e922b5b6474c6be4b0fb63f2}{get\+\_\+quantity\+\_\+double}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int64\+\_\+t \mbox{\hyperlink{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}{price}}
+\item 
+int64\+\_\+t \mbox{\hyperlink{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}{quantity}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores one price level from the order book using fixed-\/point integers. 
+\begin{DoxyParams}{Parameters}
+{\em price} & Price scaled by 100. \\
+\hline
+{\em quantity} & Quantity scaled by 100000000. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return value. 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{struct_order_level_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_order_level_a847655546923ff923603507884c124b9}\index{OrderLevel@{OrderLevel}!get\_price\_double@{get\_price\_double}}
+\index{get\_price\_double@{get\_price\_double}!OrderLevel@{OrderLevel}}
+\doxysubsubsection{\texorpdfstring{get\_price\_double()}{get\_price\_double()}}
+{\footnotesize\ttfamily \label{struct_order_level_a847655546923ff923603507884c124b9} 
+double Order\+Level\+::get\+\_\+price\+\_\+double (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Converts the fixed-\/point price into a decimal value for display. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Price as a double with two decimal places of precision. 
+\end{DoxyReturn}
+\Hypertarget{struct_order_level_aefb35bc5e922b5b6474c6be4b0fb63f2}\index{OrderLevel@{OrderLevel}!get\_quantity\_double@{get\_quantity\_double}}
+\index{get\_quantity\_double@{get\_quantity\_double}!OrderLevel@{OrderLevel}}
+\doxysubsubsection{\texorpdfstring{get\_quantity\_double()}{get\_quantity\_double()}}
+{\footnotesize\ttfamily \label{struct_order_level_aefb35bc5e922b5b6474c6be4b0fb63f2} 
+double Order\+Level\+::get\+\_\+quantity\+\_\+double (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Converts the fixed-\/point quantity into a decimal value for display. 
+\begin{DoxyParams}{Parameters}
+{\em None.} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Quantity as a double with eight decimal places of precision. 
+\end{DoxyReturn}
+\Hypertarget{struct_order_level_a5f93b526dc6e7d9817b5f136cc5f05eb}\index{OrderLevel@{OrderLevel}!operator==@{operator==}}
+\index{operator==@{operator==}!OrderLevel@{OrderLevel}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{struct_order_level_a5f93b526dc6e7d9817b5f136cc5f05eb} 
+bool Order\+Level\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_order_level}{Order\+Level}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Compares two order levels for matching price and quantity. 
+\begin{DoxyParams}{Parameters}
+{\em other} & Order level to compare against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True when both price and quantity are equal, otherwise false. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_order_level_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3}\index{OrderLevel@{OrderLevel}!price@{price}}
+\index{price@{price}!OrderLevel@{OrderLevel}}
+\doxysubsubsection{\texorpdfstring{price}{price}}
+{\footnotesize\ttfamily \label{struct_order_level_a42a3c6abbf5db6be01ff4210aba835e3} 
+int64\+\_\+t Order\+Level\+::price}
+
+\Hypertarget{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca}\index{OrderLevel@{OrderLevel}!quantity@{quantity}}
+\index{quantity@{quantity}!OrderLevel@{OrderLevel}}
+\doxysubsubsection{\texorpdfstring{quantity}{quantity}}
+{\footnotesize\ttfamily \label{struct_order_level_a16c33b4ff2fd3478c28ce84d796f59ca} 
+int64\+\_\+t Order\+Level\+::quantity}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/orderbook/\mbox{\hyperlink{orderbook_8hpp}{orderbook.\+hpp}}\end{DoxyCompactItemize}

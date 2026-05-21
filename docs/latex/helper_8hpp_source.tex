@@ -1,0 +1,42 @@
+\doxysection{helper.\+hpp}
+\hypertarget{helper_8hpp_source}{}\label{helper_8hpp_source}\index{src/Utilities/helper.hpp@{src/Utilities/helper.hpp}}
+\mbox{\hyperlink{helper_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ HELPER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ HELPER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <boost/json.hpp>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{orderbook_8hpp}{../orderbook/orderbook.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }json\ =\ boost::json;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{/***\ }}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ Processes\ a\ websocket\ JSON\ update\ and\ applies\ bid\ and\ ask\ changes\ to\ the\ order\ book.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ @param\ obj\ Parsed\ JSON\ object\ containing\ bid\ updates\ under\ "{}b"{}\ and\ ask\ updates\ under\ "{}a"{}.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ @param\ order\_book\ OrderBook\ instance\ to\ update\ with\ parsed\ price\ levels.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ @return\ No\ return\ value.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{***/}}
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{helper_8hpp_a87551d75a72e450de510cdda28c1a2d9}{processObject}}(\textcolor{keyword}{const}\ json::object\&\ obj,\ \mbox{\hyperlink{class_order_book}{OrderBook}}\&\ order\_book);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/***\ }}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Parses\ a\ decimal\ JSON\ string\ into\ a\ fixed-\/point\ signed\ integer.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ @param\ value\ JSON\ string\ containing\ a\ non-\/negative\ decimal\ number.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ @param\ target\_decimals\ Number\ of\ fractional\ decimal\ places\ to\ preserve.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ @return\ Fixed-\/point\ integer\ representation\ of\ the\ input\ value.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{***/}}
+\DoxyCodeLine{00027\ int64\_t\ \mbox{\hyperlink{helper_8hpp_ab1806cb05016c1468914d7e27c14650d}{parse\_string\_to\_int64}}(\textcolor{keyword}{const}\ boost::json::string\&\ value,\ \textcolor{keywordtype}{int}\ target\_decimals);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{/***\ }}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ Prints\ the\ best\ bid\ and\ ask\ levels\ in\ human-\/readable\ decimal\ format.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ *\ \ param\ level\ Pair\ containing\ the\ best\ bid\ as\ first\ and\ best\ ask\ as\ second.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ *\ @return\ No\ return\ value.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{***/}}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{helper_8hpp_a2041dfd1eda5161c1fd84586155b29e9}{print\_order\_book}}(std::pair<OrderLevel,\ OrderLevel>\&\ level);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HELPER\_HPP}}
+
+\end{DoxyCode}

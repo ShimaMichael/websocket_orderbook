@@ -5,11 +5,7 @@
 #include <iostream>
 #include <iomanip>
 
-/*** Applies bid and ask updates from a parsed websocket JSON object to the order book.
-@param obj Parsed JSON object containing bid updates under "b" and ask updates under "a".
-@param order_book OrderBook instance to update with parsed price levels.
-@return No return value.
-***/
+
 void processObject(const json::object& obj, OrderBook& order_book) {
     auto process_side = [&](const std::string& key, const std::string& label, auto update_func) {
         if (!obj.contains(key)) {
@@ -36,10 +32,6 @@ void processObject(const json::object& obj, OrderBook& order_book) {
     process_side("a", "ask", &OrderBook::update_ask);
 }
 
-/*** Prints the current best bid and ask in human-readable decimal format.
-@param level Pair containing the best bid as first and best ask as second.
-@return No return value.
-***/
 void print_order_book(std::pair<OrderLevel, OrderLevel>& level) {
     OrderLevel best_bid = level.first;
     OrderLevel best_ask =level.second;
@@ -54,16 +46,12 @@ void print_order_book(std::pair<OrderLevel, OrderLevel>& level) {
               << std::endl;
 }
 
-/*** Converts a decimal string into a fixed-point signed integer.
-@param value JSON string containing a non-negative decimal number.
-@param target_decimals Number of fractional decimal places to preserve.
-@return Fixed-point integer representation of the input value.
-***/
+
 int64_t parse_string_to_int64(const boost::json::string& price_str, int target_decimals) {
     int64_t whole_part = 0;
     int64_t frac_part = 0;
     size_t i = 0;
-    size_t len = std::string(price_str).length();
+    size_t len = price_str.size();
 
     while (i < len && price_str[i] != '.') {
         whole_part = whole_part * 10 + (price_str[i] - '0');
@@ -92,4 +80,22 @@ int64_t parse_string_to_int64(const boost::json::string& price_str, int target_d
     }
 
     return (whole_part * multiplier) + frac_part;
+}
+
+void network_io_loop(websocket_connection& ws, bool& is_running, MessageQueue& network_queue) {
+    try {
+        while (is_running) {
+            beast::flat_buffer buffer;
+            
+            ws.read(buffer); 
+
+            std::string raw_data = beast::buffers_to_string(buffer.data());
+            network_queue.push(std::move(raw_data));
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Network Stream Interrupted: " 
+        << e.what() 
+        << std::endl;
+        is_running = false;
+    }
 }
