@@ -6,6 +6,7 @@
 **Documentation**
 - **Documentation** have been generated with doxygen which can be viewed in Latex and in web
 To view documentation
+run doxygen in CLI then:
 Navigated to [docs/html/index.html](docs/html/index.html) to open in browser
 Navigated to [docs/latex](docs/latex) to view tex file for 
 

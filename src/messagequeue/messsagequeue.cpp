@@ -4,24 +4,31 @@ MessageQueue::MessageQueue() = default;
 
 MessageQueue::~MessageQueue() = default;
 
-void MessageQueue::push (std::string message){
-    std::unique_lock<std::mutex> lock(mutex_);
-    queue.push(std::move(message));
-    cv_.notify_one();
+bool MessageQueue::push (std::string message){
+    auto current_head = head.load(std::memory_order_acquire);
+    auto current_tail = tail.load(std::memory_order_relaxed);
+
+    if ((current_tail - current_head) >= 1024){
+        return false;
+    }
+
+    auto index = current_tail % 1024;
+    queue[index] = message;
+    tail.store(current_tail + 1, std::memory_order_release);
+    return true;
 }
 
 bool MessageQueue::pop (std::string& message){
-    std::unique_lock<std::mutex> lock(mutex_);
+    auto current_head = head.load(std::memory_order_relaxed);
+    auto current_tail = tail.load(std::memory_order_acquire);
 
-    while(queue.empty()){
-        auto status = cv_.wait_for(lock, std::chrono::milliseconds(1));
-
-        if (status == std::cv_status::timeout && queue.empty()){
-            return false;
-        }
+    if(current_head == current_tail){
+        return false;
     }
-    
-    message = std::move(queue.front());
-    queue.pop();
+    auto index = current_head % 1024;
+    message = queue[index];
+
+    head.store(current_head + 1, std::memory_order_release);
+
     return true;
 }

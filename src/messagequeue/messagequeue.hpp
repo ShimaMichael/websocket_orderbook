@@ -5,6 +5,7 @@
 #include <mutex>
 #include <string>
 #include <condition_variable>
+#include <vector>
 
 /**
  * This class maintains a queue of messages that can be read 
@@ -12,28 +13,29 @@
  */
 class MessageQueue
 {
-private:
-    std::mutex mutex_;
-    std::condition_variable cv_;
-    std::queue<std::string> queue;
+    private:
+        std::vector<std::string> queue{1024};
 
-public:
-    MessageQueue();
-    ~MessageQueue();
+        std::atomic<size_t> head{0};
+        std::atomic<size_t> tail{0};
 
-/**
- * This function addes a new message to the back of our queue
- * @param message The message to be added to Queue
- * @return None
- */
-void push (std::string message);
+    public:
+        MessageQueue();
+        ~MessageQueue();
 
-/**
- * This function pops a  message at the top of the queue
- * @param None 
- * @return The message to be removed to Queue
- */
-bool pop (std::string& message);
+    /**
+     * This function addes a new message to the back of our queue
+     * @param message The message to be added to Queue
+     * @return None
+     */
+    bool push (std::string message);
+
+    /**
+     * This function pops a  message at the top of the queue
+     * @param None 
+     * @return The message to be removed to Queue
+     */
+    bool pop (std::string& message);
 
 };
 
